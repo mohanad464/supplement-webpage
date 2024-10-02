@@ -1,8 +1,10 @@
 const Header = () => {
   return (
     <header className="bg-primary">
-      <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8">
-        <img src="/logo122345.png" alt="logo" width={100} height={100} />
+      <div className="mx-auto flex h-16 max-w-screen-xl items-center justify-between gap-8 px-4 sm:px-6 lg:px-8 ">
+        <a href="/" className="mb-3">
+          <img src="/logo122345.png" alt="logo" width={100} height={100} />
+        </a>
 
         <div className="flex flex-1 items-center justify-end md:justify-between">
           <nav aria-label="Global" className="hidden md:block">
@@ -53,12 +55,11 @@ const Header = () => {
 
           <div className="flex items-center gap-4">
             <div className="sm:flex sm:gap-4">
-
-            <a
-                className="block rounded-md border px-5 py-2.5 text-sm font-medium transition hover:bg-secondary"
+              <a
+                className="block rounded-md px-5 py-2.5 text-sm bg-cart font-medium transition hover:bg-secondary"
                 href="#"
               >
-                🛒 
+                🛒
               </a>
 
               <a
@@ -74,7 +75,6 @@ const Header = () => {
               >
                 Register
               </a>
-
             </div>
 
             <button className="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">

@@ -9,7 +9,8 @@ module.exports = {
       colors: {
 primary:"#C426DC",
 secondary: "#d49ce2",
-text:"#C426DC"
+text:"#C426DC",
+cart:"#A114AB"
     },
   },
 },
