@@ -3,12 +3,18 @@ const Footer = () => {
     <footer className="bg-gray-100">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col items-center">
         <div className="flex items-center">
-          <img src="logo122345.png" alt="logo" width={70} height={50} className="mr-2 mb-2" />
+          <img
+            src="logo122345.png"
+            alt="logo"
+            width={70}
+            height={50}
+            className="mr-2 mb-2"
+          />
           <p className="font-bold text-lg">NutriEdge</p>
-          </div>
-          <p className="mx-auto mt-6 max-w-md text-center leading-relaxed font-serif">
-        Fuel your body, unleach your potential.
-          </p>
+        </div>
+        <p className="mx-auto mt-6 max-w-md text-center leading-relaxed font-serif">
+          Fuel your body, unleach your potential.
+        </p>
 
         <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
           <li>

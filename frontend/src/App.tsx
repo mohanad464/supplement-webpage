@@ -1,3 +1,4 @@
+import Cart from "./pages/Cart";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Herosection from "./components/Herosection";
@@ -9,6 +10,7 @@ const App = () => {
       <Header />
       <Herosection />
       <Footer />
+      <Cart />
     </div>
   );
 };
