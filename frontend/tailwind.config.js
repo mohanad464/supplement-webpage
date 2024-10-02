@@ -4,7 +4,11 @@ module.exports = {
     './src/**/*.{js,ts,jsx,tsx}', // This should point to your Vite source files
   ],
   theme: {
-    extend: {},
+    extend: {
+      
+    },
   },
+
+
   plugins: [],
 };
