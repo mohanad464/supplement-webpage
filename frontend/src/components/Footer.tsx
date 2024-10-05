@@ -1,10 +1,12 @@
+import Logo from "../assets/logo122345.png";
+
 const Footer = () => {
   return (
     <footer className="bg-gray-100">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8 flex flex-col items-center">
         <div className="flex items-center">
           <img
-            src="logo122345.png"
+            src={Logo}
             alt="logo"
             width={70}
             height={50}
