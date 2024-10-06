@@ -62,13 +62,14 @@ const Header = () => {
               </li>
               <li>
                 <NavLink
-                  to="/protein"
+                  to="/products"
                   className={({ isActive }) =>
-                    `transition text-yellow-500 ${
+                    `transition ${
                       isActive ? "text-yellow-500" : ""
                     }`
                   }
                 >
+                  Products
                 </NavLink>
               </li>
             </ul>
