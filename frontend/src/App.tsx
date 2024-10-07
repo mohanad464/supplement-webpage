@@ -8,9 +8,9 @@ import RegisterPage from "./pages/RegisterPage";
 import CartPage from "./pages/CartPage";
 
 const App = () => {
+  
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col">
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -19,7 +19,6 @@ const App = () => {
           <Route path="/cart" element={<CartPage/>} />
         </Routes>
         <Footer />
-      </div>
     </BrowserRouter>
   );
 };

@@ -1,160 +1,84 @@
-import { useState } from 'react';
-import { Box, Container, Typography, TextField, Button, Alert } from "@mui/material";
-import { Link, useNavigate } from 'react-router-dom';
+import { Box, Container, Typography, TextField, Button } from "@mui/material";
+import { useRef } from "react";
 
 const RegisterPage = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    email: '',
-    password: ''
-  });
-  const [errors, setErrors] = useState({});
-  const [submitError, setSubmitError] = useState('');
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
+  const onSubmit = async () => {
+    const firstName = firstNameRef.current?.value;
+    const lastName = lastNameRef.current?.value;
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.firstname.trim()) newErrors.firstname = 'First name is required';
-    if (!formData.lastname.trim()) newErrors.lastname = 'Last name is required';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
-    return newErrors;
-  };
+    console.log(firstName, lastName, email, password);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const newErrors = validateForm();
-    
-    if (Object.keys(newErrors).length === 0) {
-      try {
-        // Add your registration logic here
-        console.log('Form submitted:', formData);
-        // On successful registration, redirect to login
-        navigate('/login');
-      } catch (error) {
-        setSubmitError('Registration failed. Please try again.');
-      }
-    } else {
-      setErrors(newErrors);
-    }
+    //MAKE THE CALL TO API TO CREATE THE USER IN THE DATABASE
+
+    const response = await fetch("http://localhost:3003/User/register", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        firstName,
+        lastName,
+        email,
+        password,
+      }),
+    });
+
+    const data = await response.json();
+
+    console.log(data)
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container>
       <Box
-        component="form"
-        onSubmit={handleSubmit}
         sx={{
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           mt: 4,
-          mb: 4,
         }}
       >
-        <Typography variant="h5" sx={{ mb: 3 }}>Register New Account</Typography>
-        
-        {submitError && (
-          <Alert severity="error" sx={{ width: '100%', mb: 2 }}>{submitError}</Alert>
-        )}
-
+        <Typography variant="h6">Register New Account</Typography>
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             gap: 2,
-            width: '100%',
+            mt: 2,
             border: 1,
             borderColor: "#f5f5f5",
-            borderRadius: 1,
-            padding: 3,
+            padding: 2,
           }}
         >
-          <TextField 
-            label="First Name" 
+          <TextField
+            inputRef={firstNameRef}
+            label="First Name"
             name="firstname"
-            value={formData.firstname}
-            onChange={handleChange}
-            error={!!errors.firstname}
-            helperText={errors.firstname}
-            fullWidth
           />
-          <TextField 
-            label="Last Name" 
-            name="lastname"
-            value={formData.lastname}
-            onChange={handleChange}
-            error={!!errors.lastname}
-            helperText={errors.lastname}
-            fullWidth
-          />
-          <TextField 
-            label="Email" 
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            error={!!errors.email}
-            helperText={errors.email}
-            fullWidth
-          />
-          <TextField 
-            type="password" 
-            label="Password" 
+          <TextField inputRef={lastNameRef} label="Last Name" name="lastName" />
+          <TextField inputRef={emailRef} label="Email" name="email" />
+          <TextField
+            inputRef={passwordRef}
+            type="password"
+            label="Password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
-            error={!!errors.password}
-            helperText={errors.password}
-            fullWidth
           />
-          <Button 
-            type="submit"
-            sx={{
-              backgroundColor: "#C426DC",
-              '&:hover': {
-                backgroundColor: '#a01eb6'
-              }
-            }} 
+
+          <Button
+            onClick={onSubmit}
+            sx={{ backgroundColor: "#C426DC" }}
             variant="contained"
-            fullWidth
           >
             Register
           </Button>
-          
-          <Box sx={{ mt: 2, textAlign: 'center' }}>
-            <Typography variant="body2">
-              Already have an account?{' '}
-              <Link to="/login" style={{ color: '#C426DC', textDecoration: 'none' }}>
-                Login here
-              </Link>
-            </Typography>
-          </Box>
         </Box>
       </Box>
     </Container>

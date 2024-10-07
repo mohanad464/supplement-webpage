@@ -1,10 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel";
-
-interface ExtendRequest extends Request {
-  user?: any;
-}
+import { ExtendRequest } from "../types/extendedRequest";
 
 const validateJWT = (req: ExtendRequest, res: Response, next: NextFunction) => {
   const authorizationHeader = req.get("authorization");
@@ -21,10 +18,7 @@ const validateJWT = (req: ExtendRequest, res: Response, next: NextFunction) => {
     return;
   }
 
-  jwt.verify(
-    token,
-    "tsMmZKkTqZ4vB0hZRdCwXy9Me8eHAxeH",
-    async (err, payload) => {
+  jwt.verify(token,process.env.JWT_SECRET||"", async (err, payload) => {
       if (err) {
         res.status(403).send("Invalid token");
         return;
@@ -45,8 +39,7 @@ const validateJWT = (req: ExtendRequest, res: Response, next: NextFunction) => {
       const user = await userModel.findOne({ email: userPayLoad.email });
       req.user = user;
       next();
-    }
-  );
+    });
 };
 
 export default validateJWT;

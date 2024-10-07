@@ -1,16 +1,16 @@
 import mongoose, { Schema, Document, ObjectId } from "mongoose";
 import { IProduct } from "./ProductModel";
 
-const CartStatusEnum = ["active", "completed"]
+const CartStatusEnum = ["active", "completed"];
 
-export interface ICartItem extends Document {
+export interface ICartItem {
   product: IProduct;
   unitPrice: number;
   quantity: number;
 }
 
 export interface ICart extends Document {
-    userId: ObjectId | string;
+  userId: ObjectId | string;
   items: ICartItem[];
   totalAmount: number;
   status: "active" | "completed";
@@ -23,10 +23,10 @@ const cartItemSchema = new Schema<ICartItem>({
 });
 
 const cartSchema = new Schema<ICart>({
-  userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  userId: {type: Schema.Types.ObjectId, ref: "User", required: true },
   items: [cartItemSchema],
   totalAmount: { type: Number, required: true },
-  status: { type: String, enum: CartStatusEnum, default: "active" },
+  status: { type: String, enum: CartStatusEnum, default: "active" }
 });
 
 export const cartModel = mongoose.model<ICart>("Cart", cartSchema);
