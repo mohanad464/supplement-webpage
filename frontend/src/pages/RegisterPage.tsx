@@ -1,11 +1,15 @@
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
+  const [error, setError] = useState("");
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
 
   const onSubmit = async () => {
     const firstName = firstNameRef.current?.value;
@@ -13,14 +17,17 @@ const RegisterPage = () => {
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
 
-    console.log(firstName, lastName, email, password);
+    // validate the form data
+    if (!firstName || !lastName || !email || !password) {
+      setError("Check the submitted data");
+      return;
+    }
 
-    //MAKE THE CALL TO API TO CREATE THE USER IN THE DATABASE
-
+    //Make the call to API to create the user
     const response = await fetch("http://localhost:3003/User/register", {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         firstName,
@@ -30,9 +37,18 @@ const RegisterPage = () => {
       }),
     });
 
-    const data = await response.json();
+    if (!response.ok) {
+      setError("Unable to register user, please try different credientials!");
+      return;
+    }
 
-    console.log(data)
+    const token = await response.json();
+
+    if (!token) {
+      setError("Incorrect token");
+      return;
+    }
+    navigate("/");
   };
 
   return (
@@ -63,22 +79,29 @@ const RegisterPage = () => {
             label="First Name"
             name="firstname"
           />
-          <TextField inputRef={lastNameRef} label="Last Name" name="lastName" />
+          <TextField inputRef={lastNameRef} label="Last Name" name="lastname" />
+
           <TextField inputRef={emailRef} label="Email" name="email" />
+
           <TextField
             inputRef={passwordRef}
             type="password"
             label="Password"
             name="password"
           />
-
           <Button
+            sx={{
+              backgroundColor: "#C426DC",
+              "&:hover": {
+                backgroundColor: "#a01eb6",
+              },
+            }}
             onClick={onSubmit}
-            sx={{ backgroundColor: "#C426DC" }}
             variant="contained"
           >
             Register
           </Button>
+          {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
         </Box>
       </Box>
     </Container>
