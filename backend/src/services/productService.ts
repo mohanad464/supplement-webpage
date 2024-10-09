@@ -8,8 +8,8 @@ export const seedIntialProducts = async () => {
   try {
     const products = [
       {
-        title: "Wireless Headphones",
-        image: "image.jpg",
+        title: "Whey Protein isolate",
+        image: "https://m.media-amazon.com/images/I/71yR1nfqaCL._AC_UF894,1000_QL80_.jpg",
         price: 10,
         stock: 15,
       },

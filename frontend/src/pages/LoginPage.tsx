@@ -1,6 +1,8 @@
 import { Box, Container, Typography, TextField, Button } from "@mui/material";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/Auth/AuthContext";
+import { BASE_URL } from "../constants/baseURL";
 
 const LoginPage = () => {
   const [error, setError] = useState("");
@@ -8,6 +10,8 @@ const LoginPage = () => {
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
+
+  const { login } = useAuth();
 
   const onSubmit = async () => {
     const email = emailRef.current?.value;
@@ -20,7 +24,7 @@ const LoginPage = () => {
     }
 
     //Make the call to API to create the user
-    const response = await fetch("http://localhost:3003/User/login", {
+    const response = await fetch(`${BASE_URL}/user/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -42,6 +46,8 @@ const LoginPage = () => {
       setError("Incorrect token");
       return;
     }
+
+    login(email, token);
     navigate("/");
   };
 

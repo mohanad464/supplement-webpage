@@ -5,6 +5,9 @@ import { seedIntialProducts } from "./services/productService";
 import productRoute from "./routes/productRoute";
 import cartRoute from "./routes/cartRoute"
 import cors from "cors"
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const port = 3003;

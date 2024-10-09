@@ -55,53 +55,69 @@ const RegisterPage = () => {
     <Container>
       <Box
         sx={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          mt: 4,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '32px',
         }}
       >
         <Typography variant="h6">Register New Account</Typography>
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            mt: 2,
-            border: 1,
-            borderColor: "#f5f5f5",
-            padding: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '16px',
+            marginTop: '16px',
+            border: '1px solid #f5f5f5',
+            padding: '16px',
+            width: '100%',
+            maxWidth: '400px',
           }}
         >
           <TextField
             inputRef={firstNameRef}
             label="First Name"
             name="firstname"
+            fullWidth
           />
-          <TextField inputRef={lastNameRef} label="Last Name" name="lastname" />
-
-          <TextField inputRef={emailRef} label="Email" name="email" />
-
+          <TextField
+            inputRef={lastNameRef}
+            label="Last Name"
+            name="lastname"
+            fullWidth
+          />
+          <TextField
+            inputRef={emailRef}
+            label="Email"
+            name="email"
+            fullWidth
+          />
           <TextField
             inputRef={passwordRef}
             type="password"
             label="Password"
             name="password"
+            fullWidth
           />
           <Button
-            sx={{
-              backgroundColor: "#C426DC",
-              "&:hover": {
-                backgroundColor: "#a01eb6",
-              },
-            }}
             onClick={onSubmit}
             variant="contained"
+            fullWidth
+            sx={{
+              backgroundColor: '#C426DC',
+              '&:hover': {
+                backgroundColor: '#a01eb6',
+              },
+            }}
           >
             Register
           </Button>
-          {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
+          {error && (
+            <Typography sx={{ color: 'red' }}>
+              {error}
+            </Typography>
+          )}
         </Box>
       </Box>
     </Container>
