@@ -12,6 +12,7 @@ import CartProvider from "./context/Auth/Cart/CartProvider";
 import CheckoutPage from "./pages/CheckoutPage";
 import OrderSuccessPage from "./pages/OrderSuccessPage";
 import MyOrdersPage from "./pages/MyOrdersPage";
+import ProductsPage from "./pages/ProductsPage";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route path="/" element={<HomePage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
+            <Route path="products" element={<ProductsPage/>}/>
             <Route element={<ProtectedRoute />}>
               <Route path="/cart" element={<CartPage />} />
               <Route path="/checkout" element={<CheckoutPage />} />
