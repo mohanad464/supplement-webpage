@@ -15,7 +15,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
     const fetchCart = async () => {
-      const response = await fetch(`${BASE_URL}/Cart`, {
+      const response = await fetch(`${BASE_URL}/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
