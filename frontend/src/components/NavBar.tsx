@@ -45,36 +45,7 @@ function NavBar() {
                   Home
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to="/accessories"
-                  className={({ isActive }) =>
-                    `transition ${isActive ? "text-yellow-500" : ""}`
-                  }
-                >
-                  Accessories
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/vitamins"
-                  className={({ isActive }) =>
-                    `transition ${isActive ? "text-yellow-500" : ""}`
-                  }
-                >
-                  Vitamin & Health
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to="/protein"
-                  className={({ isActive }) =>
-                    `transition ${isActive ? "text-yellow-500" : ""}`
-                  }
-                >
-                  Protein
-                </NavLink>
-              </li>
+
               <li>
                 <NavLink
                   to="/products"
@@ -85,6 +56,30 @@ function NavBar() {
                   Products
                 </NavLink>
               </li>
+
+              <li>
+                <NavLink
+                  to="/accessories"
+                  className={({ isActive }) =>
+                    `transition ${isActive ? "text-yellow-500" : ""}`
+                  }
+                >
+                  Accessories
+                </NavLink>
+              </li>
+              
+              <li>
+                <NavLink
+                  to="/vitamins"
+                  className={({ isActive }) =>
+                    `transition ${isActive ? "text-yellow-500" : ""}`
+                  }
+                >
+                  Vitamin & Health
+                </NavLink>
+              </li>
+              
+              
             </ul>
           </nav>
 

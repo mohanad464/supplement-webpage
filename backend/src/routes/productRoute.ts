@@ -1,8 +1,7 @@
 import express from "express";
-import { getAllProducts } from "../services/productService";
-import router from "./userRoute";
+import { getAllAccessories, getAllProducts } from "../services/productService";
 
-const route = express.Router();
+const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {

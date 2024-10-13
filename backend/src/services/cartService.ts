@@ -78,6 +78,7 @@ export const addItemToCart = async ({
     return { data: "Item already exists in cart!", statusCode: 400 };
   }
 
+
   const product = await productModel.findById(productId);
 
   if (!product) {

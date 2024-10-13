@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Grid, Container, Typography } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import ProductCard from "../components/ProductCard";
+import { useState, useEffect } from "react";
 import { BASE_URL } from "../constants/baseURL";
 
-interface Product {
+interface Accessories {
   _id: string;
   title: string;
   image: string;
@@ -11,15 +11,15 @@ interface Product {
   stock: number;
 }
 
-const ProductsPage: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+const AccessoriesPage: React.FC = () => {
+  const [accessories, setAccessories] = useState<Accessories[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchAccessories = async () => {
       try {
-        const response = await fetch(`${BASE_URL}/product`, {
+        const response = await fetch(`${BASE_URL}/Accessories`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -27,20 +27,20 @@ const ProductsPage: React.FC = () => {
         });
 
         if (!response.ok) {
-          throw new Error("Failed to fetch products");
+          throw new Error("Failed to fetch accessories");
         }
 
-        const fetchedProducts = await response.json();
-        setProducts(fetchedProducts);
+        const fetchedAccessories = await response.json();
+        setAccessories(fetchedAccessories);
         setLoading(false);
       } catch (err) {
-        console.error("Error fetching products:", err);
-        setError("Failed to fetch products. Please try again later.");
+        console.error("Error fetching accessories:", err);
+        setError("Failed to fetch accessories. Please try again later.");
         setLoading(false);
       }
     };
 
-    fetchProducts();
+    fetchAccessories();
   }, []);
 
   if (loading) {
@@ -50,12 +50,11 @@ const ProductsPage: React.FC = () => {
   if (error) {
     return <Typography color="error">{error}</Typography>;
   }
-
   return (
     <Container>
       <Typography
-      mb={8}
-      mt={8}
+        mb={8}
+        mt={8}
         variant="h4"
         component="h1"
         gutterBottom
@@ -71,13 +70,13 @@ const ProductsPage: React.FC = () => {
         Our Products
       </Typography>
       <Grid container spacing={3}>
-        {products.map((product) => (
-          <Grid item xs={12} sm={6} md={4} key={product._id}>
+        {accessories.map((accessories) => (
+          <Grid item xs={12} sm={6} md={4} key={accessories._id}>
             <ProductCard
-              _id={product._id}
-              title={product.title}
-              image={product.image}
-              price={product.price.toString()}
+              _id={accessories._id}
+              title={accessories.title}
+              image={accessories.image}
+              price={accessories.price.toString()}
             />
           </Grid>
         ))}
@@ -86,4 +85,4 @@ const ProductsPage: React.FC = () => {
   );
 };
 
-export default ProductsPage;
+export default AccessoriesPage;

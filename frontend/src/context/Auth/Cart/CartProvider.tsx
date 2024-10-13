@@ -51,7 +51,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     };
 
     fetchCart();
-  }, [token]);
+  }, [error, token]);
   const addItemToCart = async (productId: string) => {
     try {
       const response = await fetch(`${BASE_URL}/cart/items`, {

@@ -7,13 +7,16 @@ export interface IProduct extends Document {
   stock: number;
 }
 
+
+
 const productSchema = new Schema<IProduct>({
-  title: { type: String, required: true },
-  image: { type: String, required: true },
-  price: { type: Number, required: true },
-  stock: { type: Number, required: true, default: 0 },
+  title: { type: String, required: true, ref: "product"},
+  image: { type: String, required: true, ref: "product"},
+  price: { type: Number, required: true, ref: "product"},
+  stock: { type: Number, required: true, ref: "product" ,default: 0 },
 });
 
-export const productModel = mongoose.model<IProduct>("product", productSchema);
 
-export default productModel;
+
+export const productModel = mongoose.model<IProduct>("product", productSchema);
+ export default productModel;
